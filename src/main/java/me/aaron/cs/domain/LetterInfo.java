@@ -22,10 +22,10 @@ public class LetterInfo implements Serializable {
     private int letter_id;
     private int send_user_id;
     private String send_user_avatar;
-    private int send_user_sex;
+    private String send_user_sex;
     private String send_user_location;
     private String content;
-    private String create_time;
+    private long create_time;
 
 
     public String getContent() {
@@ -36,11 +36,11 @@ public class LetterInfo implements Serializable {
         this.content = content;
     }
 
-    public String getCreate_time() {
+    public long getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(String create_time) {
+    public void setCreate_time(long create_time) {
         this.create_time = create_time;
     }
 
@@ -76,11 +76,11 @@ public class LetterInfo implements Serializable {
         this.send_user_location = send_user_location;
     }
 
-    public int getSend_user_sex() {
+    public String getSend_user_sex() {
         return send_user_sex;
     }
 
-    public void setSend_user_sex(int send_user_sex) {
+    public void setSend_user_sex(String send_user_sex) {
         this.send_user_sex = send_user_sex;
     }
 

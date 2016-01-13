@@ -27,8 +27,8 @@ public class Letter implements Serializable {
     private String loc_cityname;
     private String loc_longitude;
     private String loc_latitude;
-    private String update_time;
-    private String create_time;
+    private long update_time;
+    private long create_time;
 
     public int getReceived_user_id() {
         return received_user_id;
@@ -62,19 +62,19 @@ public class Letter implements Serializable {
         this.user_id = user_id;
     }
 
-    public String getCreate_time() {
+    public long getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(String create_time) {
+    public void setCreate_time(long create_time) {
         this.create_time = create_time;
     }
 
-    public String getUpdate_time() {
+    public long getUpdate_time() {
         return update_time;
     }
 
-    public void setUpdate_time(String update_time) {
+    public void setUpdate_time(long update_time) {
         this.update_time = update_time;
     }
 

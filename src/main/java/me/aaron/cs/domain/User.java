@@ -30,8 +30,8 @@ public class User implements Serializable {
     private String avatar;
     private String loc_name;
     private String douban_alt;
-    private String update_time;
-    private String create_time;
+    private long update_time;
+    private long create_time;
 
     public String getAvatar() {
         return avatar;
@@ -41,11 +41,11 @@ public class User implements Serializable {
         this.avatar = avatar;
     }
 
-    public String getCreate_time() {
+    public long getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(String create_time) {
+    public void setCreate_time(long create_time) {
         this.create_time = create_time;
     }
 
@@ -113,11 +113,11 @@ public class User implements Serializable {
         this.type = type;
     }
 
-    public String getUpdate_time() {
+    public long getUpdate_time() {
         return update_time;
     }
 
-    public void setUpdate_time(String update_time) {
+    public void setUpdate_time(long update_time) {
         this.update_time = update_time;
     }
 

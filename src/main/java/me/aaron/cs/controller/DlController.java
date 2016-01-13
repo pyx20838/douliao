@@ -61,8 +61,8 @@ public class DlController {
                 resultMap.put("userinfo", user);
                 resultMap.put("code", CsConfig.ERROR_CODE.SUCCESS);
             } else {
-                resultMap.put("code", CsConfig.ERROR_CODE.NOT_FOUND);
-                resultMap.put("msg", CsConfig.ERROR_MSG.NOT_FOUND);
+                resultMap.put("code", CsConfig.ERROR_CODE.USER_NOT_FOUND);
+                resultMap.put("msg", CsConfig.ERROR_MSG.USER_NOT_FOUND);
 
             }
             LOG.info("get personal info response - {}", (new Gson()).toJson(resultMap));
@@ -118,12 +118,12 @@ public class DlController {
                     resultMap.put("letters", letters);
                     resultMap.put("code", CsConfig.ERROR_CODE.SUCCESS);
                 } else {
-                    resultMap.put("code", CsConfig.ERROR_CODE.NOT_FOUND);
+                    resultMap.put("code", CsConfig.ERROR_CODE.LETTER_NOT_FOUND);
                     resultMap.put("msg", CsConfig.ERROR_MSG.LETTER_NOT_FOUND);
                 }
             } else {
-                resultMap.put("code", CsConfig.ERROR_CODE.NOT_FOUND);
-                resultMap.put("msg", CsConfig.ERROR_MSG.NOT_FOUND);
+                resultMap.put("code", CsConfig.ERROR_CODE.USER_NOT_FOUND);
+                resultMap.put("msg", CsConfig.ERROR_MSG.USER_NOT_FOUND);
 
             }
             LOG.info("get letters response - {}", (new Gson()).toJson(resultMap));
@@ -156,13 +156,13 @@ public class DlController {
                     resultMap.put("letter", letter);
                     resultMap.put("code", CsConfig.ERROR_CODE.SUCCESS);
                 } else {
-                    resultMap.put("code", CsConfig.ERROR_CODE.NOT_FOUND);
+                    resultMap.put("code", CsConfig.ERROR_CODE.LETTER_NOT_FOUND);
                     resultMap.put("msg", CsConfig.ERROR_MSG.LETTER_NOT_FOUND);
                 }
 
             } else {
-                resultMap.put("code", CsConfig.ERROR_CODE.NOT_FOUND);
-                resultMap.put("msg", CsConfig.ERROR_MSG.NOT_FOUND);
+                resultMap.put("code", CsConfig.ERROR_CODE.USER_NOT_FOUND);
+                resultMap.put("msg", CsConfig.ERROR_MSG.USER_NOT_FOUND);
 
             }
             LOG.info("get random letter response - {}", (new Gson()).toJson(resultMap));
