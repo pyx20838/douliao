@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<decorators defaultdir="/WEB-INF/views/v2/decorators">
+	<excludes>
+		<pattern>/media/*</pattern>
+		<pattern>/js/*</pattern>
+		<pattern>/css/*</pattern>
+		<pattern>/fonts/*</pattern>
+		<pattern>/images/*</pattern>
+		<pattern>/errors/*</pattern>
+	</excludes>
+	<decorator name="site" page="backbone_front_page.jsp">
+		<pattern>/</pattern>
+	</decorator>
+
+</decorators>

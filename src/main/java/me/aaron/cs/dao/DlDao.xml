@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ /**
+  ~ *
+  ~ *    Created by OuYangX.
+  ~ *    Copyright (c) 2015, ouyangxian@gmail.com All Rights Reserved.
+  ~ *
+  ~ */
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.aaron.cs.dao.DlDao">
+
+	<resultMap type="me.aaron.cs.domain.User" id="user">
+	    <id column="id" property="id" />
+        <result column="type" property="type"/>
+        <result column="douban_id" property="douban_id"/>
+        <result column="rongim_id" property="rongim_id"/>
+        <result column="sex" property="sex"/>
+        <result column="user_name" property="user_name"/>
+        <result column="large_avatar" property="large_avatar"/>
+        <result column="avatar" property="avatar"/>
+        <result column="loc_name" property="loc_name"/>
+        <result column="douban_alt" property="douban_alt"/>
+        <result column="update_time" property="update_time"/>
+        <result column="create_time" property="create_time"/>
+    </resultMap>
+    <resultMap type="me.aaron.cs.domain.Letter" id="letter">
+        <id column="id" property="id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="received_user_id" property="received_user_id"/>
+        <result column="content" property="content"/>
+        <result column="loc_cityname" property="loc_cityname"/>
+        <result column="loc_longitude" property="loc_longitude"/>
+        <result column="loc_latitude" property="loc_latitude"/>
+        <result column="update_time" property="update_time"/>
+        <result column="create_time" property="create_time"/>
+    </resultMap>
+    <resultMap type="me.aaron.cs.domain.LetterInfo" id="letterInfo">
+        <id column="letter_id" property="letter_id"/>
+        <result column="send_user_id" property="send_user_id"/>
+        <result column="send_user_avatar" property="send_user_avatar"/>
+        <result column="send_user_sex" property="send_user_sex"/>
+        <result column="send_user_location" property="send_user_location"/>
+        <result column="create_time" property="create_time"/>
+    </resultMap>
+    <insert id="addUser" parameterType="me.aaron.cs.domain.User" useGeneratedKeys="true" keyProperty="id">
+	    INSERT INTO t_user(type, douban_id, rongim_id, sex, user_name, large_avatar,
+	     avatar, loc_name, douban_alt, create_time, update_time)
+	    VALUES(#{type}, #{douban_id}, #{rongim_id}, #{sex}, #{user_name},#{large_avatar},
+	     #{avatar}, #{loc_name}, #{douban_alt}, now(), now()
+	    )
+	</insert>
+
+    <select id="getUser" parameterType="map" resultMap="user">
+      SELECT * from t_user t1 where 1 = 1
+      <if test="uid != null">AND (t1.douban_id=#{uid} or t1.rongim_id=#{uid}) </if>
+      <if test="type != null">AND t1.type=#{type}</if>
+      <if test="user_id != null">AND t1.id=#{user_id}</if>
+
+    </select>
+
+    <insert id="sendLetter" parameterType="me.aaron.cs.domain.Letter" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_letter(user_id, content, loc_cityname, loc_longitude, loc_latitude, create_time, update_time)
+        VALUES(#{user_id}, #{content}, #{loc_cityname}, #{loc_longitude}, #{loc_latitude}, now(), now()
+        )
+    </insert>
+    <update id="sendedLetter" parameterType="map">
+      UPDATE  t_letter SET
+        <if test="received_user_id != null"> received_user_id = #{received_user_id}</if>
+    WHERE id = #{id}
+    </update>
+    <select id="getLetters" parameterType="map" resultMap="letterInfo">
+      SELECT t1.id AS letter_id, t1.content AS content,
+        t2.id AS send_user_id, t2.avatar AS send_user_avatar,
+        t2.sex AS send_user_sex, t2.loc_name AS send_user_location
+        FROM t_letter t1 LEFT JOIN t_user t2 ON t1.user_id = t2.id
+        WHERE 1 = 1
+        <if test="user_id != null">AND t1.received_user_id = #{user_id}</if>
+        ORDER BY t1.id DESC
+    </select>
+
+    <select id="getLastLetter" parameterType="map" resultMap="letterInfo">
+      SELECT t1.id AS letter_id, t1.content AS content,
+        t2.id AS send_user_id, t2.avatar AS send_user_avatar,
+        t2.sex AS send_user_sex, t2.loc_name AS send_user_location
+        FROM t_letter t1 LEFT JOIN t_user t2 ON t1.user_id = t2.id
+        WHERE 1 = 1
+        AND t1.received_user_id = 0
+        AND t1.user_id !=  #{user_id}
+        <if test="sex != null">AND t2.sex=#{sex}</if>
+        <if test="location != null">AND t2.loc_name=#{location}</if>
+        ORDER BY t1.id ASC
+        limit 0 ,1
+    </select>
+</mapper>

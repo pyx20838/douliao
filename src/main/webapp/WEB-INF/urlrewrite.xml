@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN" "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+<urlrewrite>
+
+    <!-- 目前用于保留旧版本的页面链接 -->
+    <rule>
+        <from>^/index.jsp</from>
+        <to>/</to>
+    </rule>
+</urlrewrite>
+
